@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "ncnn-whisper": {
+      "command": "uvx",
+      "args": [
+        "--with-editable",
+        "/Users/frankshi/LProjects/Agents/_tools/ncnn_mcp",
+        "ncnn-mcp"
+      ]
+    }
+  }
+}
