@@ -15,10 +15,10 @@ async def main():
     
     DIR = pathlib.Path(__file__).parent.parent
     server_params = StdioServerParameters(
-        command="python3",
-        args=[str(DIR / "ncnn_mcp" / "server.py")],
-        # command="uvx",
-        # args=["--from", f"{DIR}", "ncnn-mcp"],
+        # command="python3",
+        # args=[str(DIR / "ncnn_mcp" / "server.py")],
+        command="uvx",  # with uvx
+        args=["--with-editable", f"{DIR}", "ncnn-mcp"],
         cwd=DIR
     )
     

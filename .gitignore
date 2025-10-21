@@ -11,3 +11,4 @@ wheels/
 
 /model/
 /data/
+uv.lock
