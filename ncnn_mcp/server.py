@@ -58,14 +58,22 @@ def transcribe_audio(file_path: str) -> str:
         # Parse output
         combined_output = "\n".join(filter(None, [result.stdout, result.stderr]))
         
+        if_found, output = False, ""
         for line in combined_output.splitlines():
             line = line.strip()
             if line.startswith("text ="):
+                if_found = True
                 parts = line.split("=", 1)
                 if len(parts) > 1:
-                    return parts[1].strip()
-        
-        return combined_output.strip()
+                    output += parts[1].strip()
+            else:
+                if if_found:
+                    output += "\n" + line
+        if if_found:
+            return output.strip()
+        else:
+            # fallback (or return null?)
+            return combined_output.strip()
     except Exception as e:
         return f"{type(e).__name__}: {str(e)}"
 

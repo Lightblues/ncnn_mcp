@@ -28,6 +28,7 @@ def transcribe_audio(file_path: str) -> str:
         "ffmpeg", "-i", file_path, "-vn", "-c:a", "pcm_s16le", "-ac", "1", "-ar", "16000", "-fflags", "bitexact", str(output_wav_path)
     ]
     subprocess.run(ffmpeg_cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print(f"Converted audio saved to: {output_wav_path}")
 
     # step2: run whisper in ncnn/build/examples directory
     whisper_cmd = ["./whisper", str(output_wav_path)]
@@ -35,6 +36,7 @@ def transcribe_audio(file_path: str) -> str:
 
     # The whisper example prints status and the final transcript. Some binaries print to stderr.
     combined_output = "\n".join(filter(None, [result.stdout, result.stderr]))
+    print(f"combinationed_output:\n{combined_output}")
 
     # Parse lines like: "text =  the the" and return the part after '=' trimmed
     for line in combined_output.splitlines():
